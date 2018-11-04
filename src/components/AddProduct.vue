@@ -6,46 +6,27 @@
       <navbar/>
 
       <!-- jumbotron -->
-      <b-jumbotron header="Add New Product"></b-jumbotron>
+      <b-jumbotron header="Nuevo cliente" style="padding: 1rem"></b-jumbotron>
       <!-- Add New Product Form  -->
       <b-form @submit="onSubmit">
-        <!-- Product Name -->
+        <!-- Facturas -->
         <b-row class="my-1">
           <b-col sm="3">
-            <label>Product Name:</label>
+            <label>Facturas:</label>
           </b-col>
           <b-col sm="9">
-            <b-form-input type="text" v-model="form.name" required placeholder="Product Name"></b-form-input>
+            <b-form-select class="mb-3" v-model="form.facturas" :options="bills" required></b-form-select>
           </b-col>
         </b-row>
 
-        <!-- Product Description -->
-        <b-row class="my-1">
-          <b-col sm="3">
-            <label>Product Description:</label>
-          </b-col>
-          <b-col sm="9">
-            <b-form-input type="text" v-model="form.description" required placeholder="Product Description"></b-form-input>
-          </b-col>
-        </b-row>
 
-        <!-- Product Price -->
+        <!-- Modo de Pago -->
         <b-row class="my-1">
           <b-col sm="3">
-            <label>Product Price:</label>
+            <label>Modo de Pago</label>
           </b-col>
           <b-col sm="9">
-            <b-form-input type="number" v-model="form.price" required placeholder="Product Price"></b-form-input>
-          </b-col>
-        </b-row>
-
-        <!-- Product Category -->
-        <b-row class="my-1">
-          <b-col sm="3">
-            <label>Product Category:</label>
-          </b-col>
-          <b-col sm="9">
-            <b-form-select class="mb-3" v-model="form.category" :options="categories" required></b-form-select>
+            <b-form-select class="mb-3" v-model="form.pago" :options="paymentTypes" required></b-form-select>
           </b-col>
         </b-row>
 
@@ -69,14 +50,16 @@ export default {
 
     return {
       form: {
-        name: '',
-        description: '',
-        price: '',
-        category: null
+        facturas: null,
+        pago: null
       },
-      categories: [
-        { text: 'Select One', value: null },
-        'Carrots', 'Beans', 'Tomatoes', 'Corn'
+      paymentTypes: [
+        { text: 'Seleccionar', value: null },
+        'Efectivo', 'Tarjeta'
+      ],
+      bills: [
+        { text: 'Seleccionar', value: null },
+        'Ninguno', '1', '2', '3', '4', '5'
       ]
     }
   },

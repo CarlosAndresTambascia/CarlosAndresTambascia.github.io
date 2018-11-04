@@ -6,15 +6,15 @@
 
       <img src="../assets/logo.png">
 
-      <b-navbar-brand href="/">Home</b-navbar-brand>
+      <b-navbar-brand href="/" style="margin-left: 15px;" >Home</b-navbar-brand>
 
       <b-collapse is-nav id="nav_collapse">
 
         <!-- Right aligned nav items -->
-        <b-nav is-nav-bar class="ml-auto">
-          <b-nav is-nav-bar>
-            <b-nav-item href="#/">Product List</b-nav-item>
-            <b-nav-item href="#/add">Add Product</b-nav-item>
+        <b-nav b-navbar-nav class="ml-auto">
+          <b-nav b-navbar-nav>
+            <b-nav-item href="#/">Cola</b-nav-item>
+            <b-nav-item href="#/add">Cliente Nuevo</b-nav-item>
           </b-nav>
         </b-nav>
 
