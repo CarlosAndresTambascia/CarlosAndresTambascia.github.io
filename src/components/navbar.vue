@@ -33,5 +33,8 @@ export default {
 img {
   height: 50px;
 }
+a{
+  color:#ffffff !important;
+}
 </style>
 

@@ -2,7 +2,19 @@
   <div class="container">
     <b-container fluid>
       <navbar/>
-      <b-table class="container" striped hover :items="products">
+      <b-alert :show="activateAnother"
+               dismissible
+               variant="warning"
+               @dismissed="dismissCountDown=0"
+               @dismiss-count-down="countDownChanged">
+        <p>This alert will dismiss after {{dismissCountDown}} seconds...</p>
+        <b-progress variant="warning"
+                    :max="dismissSecs"
+                    :value="dismissCountDown"
+                    height="4px">
+        </b-progress>
+      </b-alert>
+      <b-table class="container" striped hover :items="getProduct" >
         <template slot="Delete" scope="row">
           <b-button size="sm" variant="danger" @click.stop="deleteItem(row.index)">Pago</b-button>
           <b-button size="sm" variant="secondary" @click.stop="editItem(row.item, row.index)">Editar</b-button>
@@ -56,10 +68,18 @@
         bills: [
           'Ninguno', '1', '2', '3', '4', '5'
         ],
-        activateAnother: false
+        activateAnother: false,
+        dismissCountDown: 0,
+        dismissSecs: 10
       }
     },
     methods: {
+      showAlert () {
+        this.dismissCountDown = this.dismissSecs
+      },
+      countDownChanged (dismissCountDown) {
+        this.dismissCountDown = dismissCountDown
+      },
       deleteItem(index) {
         products.splice(index, 1);
       },
@@ -70,9 +90,10 @@
       hideModal() {
         this.$refs.myModalRef.hide();
       },
-      calculateFlow(){
+      calculateFlow(products){
         let timeToWait;
-        products.forEach(function (product) {
+        const vm = this;
+        products.map(function (product) {
           debugger;
           if (product.facturas == "Ninguno") {
             timeToWait = timeToWait + 0;
@@ -84,13 +105,18 @@
           } else if (product.pago == "Tarjeta") {
             timeToWait = timeToWait + 3;
           }
-          console.log(timeToWait);
           if (timeToWait > 10) {
             debugger;
-            this.activateAnother = true;
+            vm.activateAnother = true;
+            vm.showAlert();
           }
-          console.log(this.activateAnother);
         });
+      }
+    },
+    computed: {
+      getProduct(){
+        this.calculateFlow(this.products);
+        return this.products;
       }
     },
     created() {
@@ -98,9 +124,10 @@
         product.Delete = 'Delete';
         products.push(product);
         products = [...new Set(products.filter(p => p.facturas))];
-        this.calculateFlow();
       });
-
+    },
+    updated(){
+      this.calculateFlow()
     }
   }
 </script>
