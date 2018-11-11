@@ -1,26 +1,28 @@
 <template>
   <div class="container">
-    <b-container fluid>
       <navbar/>
-      <b-alert :show="activateAnother"
-               dismissible
-               variant="warning"
-               @dismissed="dismissCountDown=0"
-               @dismiss-count-down="countDownChanged">
-        <p>This alert will dismiss after {{dismissCountDown}} seconds...</p>
-        <b-progress variant="warning"
-                    :max="dismissSecs"
-                    :value="dismissCountDown"
-                    height="4px">
-        </b-progress>
-      </b-alert>
-      <b-table class="container" striped hover :items="getProduct" >
-        <template slot="Delete" scope="row">
-          <b-button size="sm" variant="danger" @click.stop="deleteItem(row.index)">Pago</b-button>
-          <b-button size="sm" variant="secondary" @click.stop="editItem(row.item, row.index)">Editar</b-button>
-        </template>
-      </b-table>
-
+      <div class="scrolleable">
+        <div :show="activateAnother">
+          <b-alert :show="dismissCountDown"
+                   dismissible
+                   variant="warning"
+                   @dismissed="dismissCountDown=0"
+                   @dismiss-count-down="countDownChanged">
+            <p>Se recomienda abrir otra caja. La alerta desaparecera en {{dismissCountDown}} segundos...</p>
+            <b-progress variant="warning"
+                        :max="dismissSecs"
+                        :value="dismissCountDown"
+                        height="4px">
+            </b-progress>
+          </b-alert>
+        </div>
+        <b-table class="container" striped hover :items="getProduct">
+          <template slot="Delete" scope="row">
+            <b-button size="sm" variant="danger" @click.stop="deleteItem(row.index)">Pago</b-button>
+            <b-button size="sm" variant="secondary" @click.stop="editItem(row.item, row.index)">Editar</b-button>
+          </template>
+        </b-table>
+      </div>
       <!-- Product Update form -->
       <b-modal ref="myModalRef" hide-footer title="Modificar carga">
         <b-form>
@@ -44,7 +46,6 @@
         </b-form>
         <b-btn class="mt-3" variant="outline-success" block @click="hideModal()">Actualizar</b-btn>
       </b-modal>
-    </b-container>
   </div>
 </template>
 
@@ -74,10 +75,10 @@
       }
     },
     methods: {
-      showAlert () {
+      showAlert() {
         this.dismissCountDown = this.dismissSecs
       },
-      countDownChanged (dismissCountDown) {
+      countDownChanged(dismissCountDown) {
         this.dismissCountDown = dismissCountDown
       },
       deleteItem(index) {
@@ -90,23 +91,22 @@
       hideModal() {
         this.$refs.myModalRef.hide();
       },
-      calculateFlow(products){
-        let timeToWait;
+      calculateFlow(products) {
+        let timeToWait = 0;
         const vm = this;
-        products.map(function (product) {
-          debugger;
+        vm.products.map(function (product) {
+          //debugger;
           if (product.facturas == "Ninguno") {
             timeToWait = timeToWait + 0;
           } else {
-            timeToWait = parseInt(product.facturas) * 3;
+            timeToWait = timeToWait + parseInt(product.facturas) * 3;
           }
           if (product.pago == "Efectivo") {
             timeToWait = timeToWait + 2;
           } else if (product.pago == "Tarjeta") {
             timeToWait = timeToWait + 3;
           }
-          if (timeToWait > 10) {
-            debugger;
+          if (timeToWait > 10 && products) {
             vm.activateAnother = true;
             vm.showAlert();
           }
@@ -114,7 +114,7 @@
       }
     },
     computed: {
-      getProduct(){
+      getProduct() {
         this.calculateFlow(this.products);
         return this.products;
       }
@@ -126,7 +126,7 @@
         products = [...new Set(products.filter(p => p.facturas))];
       });
     },
-    updated(){
+    updated() {
       this.calculateFlow()
     }
   }
@@ -134,7 +134,22 @@
 
 <style>
   .container {
-    width: 80%;
+    background: #fff;
+    border-radius: 4px;
+    height: 80vh;
+    padding: 0;
+    width: 40%;
+  }
+
+  table.container {
+    height: calc(100% - 66px);
+    margin: 0;
+    width: 100%;
+  }
+
+  .scrolleable{
+    overflow: auto;
+    max-height: calc(100% - 66px);
   }
 
   th {

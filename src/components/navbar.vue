@@ -6,7 +6,7 @@
 
       <img src="../assets/logo.png">
 
-      <b-navbar-brand href="/" style="margin-left: 15px;" >Home</b-navbar-brand>
+      <b-navbar-brand href="/" style="margin-left: 15px;">Home</b-navbar-brand>
 
       <b-collapse is-nav id="nav_collapse">
 
@@ -24,17 +24,22 @@
 </template>
 
 <script>
-export default {
-  name: 'navbar'
-}
+  export default {
+    name: 'navbar'
+  }
 </script>
 
-<style>
-img {
-  height: 50px;
-}
-a{
-  color:#ffffff !important;
-}
+<style scoped>
+  img {
+    height: 50px;
+
+  }
+
+  a {
+    color: #ffffff !important;
+  }
+  nav {
+    border-radius: 4px 4px 0px 0px;
+  }
 </style>
 
