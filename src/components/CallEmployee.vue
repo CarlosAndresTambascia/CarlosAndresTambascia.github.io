@@ -1,8 +1,9 @@
 <template>
   <div class="container">
     <navbar/>
-      <div class="icon">
-        <audio controls id="myVideo" class="player">
+      <div>
+        <h1 class="player">Se solicita abrir una nueva linea de cajas</h1>
+        <audio controls id="myVideo" class="player" autoplay hidden>
           <source src="../assets/OpenCajasss.mp3" type="audio/wav">
           Your browser does not support the audio element.
         </audio>
