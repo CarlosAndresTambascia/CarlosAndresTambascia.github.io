@@ -7,7 +7,8 @@
                    dismissible
                    variant="warning"
                    @dismissed="dismissCountDown=0"
-                   @dismiss-count-down="countDownChanged">
+                   @dismiss-count-down="countDownChanged"
+                   >
             <p>Se recomienda abrir otra caja. La alerta desaparecera en {{dismissCountDown}} segundos...</p>
             <b-progress variant="warning"
                         :max="dismissSecs"
@@ -69,9 +70,10 @@
         bills: [
           'Ninguno', '1', '2', '3', '4', '5'
         ],
+        openNew: false,
         activateAnother: false,
         dismissCountDown: 0,
-        dismissSecs: 10
+        dismissSecs: 3
       }
     },
     methods: {

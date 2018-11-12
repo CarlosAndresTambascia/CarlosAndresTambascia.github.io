@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Hello from '@/components/Hello';
 import AddProduct from '@/components/AddProduct';
 import ProductList from '@/components/ProductList';
+import CallEmployee from '@/components/CallEmployee';
 import navbar from '@/components/navbar';
 
 Vue.use(Router);
@@ -33,6 +34,11 @@ export default new Router({
       path: '/add',
       name: 'AddProduct',
       component: AddProduct
+    },
+    {
+      path: '/CallEmployee',
+      name: 'CallEmployee',
+      component: CallEmployee
     }
   ]
 })

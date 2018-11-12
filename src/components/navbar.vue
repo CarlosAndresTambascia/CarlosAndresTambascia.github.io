@@ -13,6 +13,7 @@
         <!-- Right aligned nav items -->
         <b-nav b-navbar-nav class="ml-auto">
           <b-nav b-navbar-nav>
+            <b-nav-item href="#/CallEmployee">Abrir Caja</b-nav-item>
             <b-nav-item href="#/">Cola</b-nav-item>
             <b-nav-item href="#/add">Cliente Nuevo</b-nav-item>
           </b-nav>
