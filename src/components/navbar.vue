@@ -6,7 +6,7 @@
 
       <img src="../assets/logo.png">
 
-      <b-navbar-brand href="/" style="margin-left: 15px;">Home</b-navbar-brand>
+      <b-navbar-brand style="margin-left: 15px;">Home</b-navbar-brand>
 
       <b-collapse is-nav id="nav_collapse">
 
